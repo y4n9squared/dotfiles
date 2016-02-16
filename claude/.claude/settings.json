@@ -1,0 +1,104 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "claude-fable-5[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "starship statusline claude-code",
+    "padding": 0,
+    "refreshInterval": 10
+  },
+  "outputStyle": "Concise",
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "xhigh"
+    }
+  },
+  "tui": "fullscreen",
+  "skipAutoPermissionPrompt": true,
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude notification"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude post-tool-use"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude session-end"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude session-start"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude stop"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude stop-failure"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /mnt/home/yang.yang/Projects/tmux-agent-mon/bin/agent-mon hook claude user-prompt-submit"
+          }
+        ]
+      }
+    ]
+  }
+}

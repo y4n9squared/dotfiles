@@ -1,0 +1,74 @@
+[user]
+  name = Yang Yang
+  email = y4n9squared@gmail.com
+
+[fetch]
+  prune = true
+
+[push]
+  default = current
+  autoSetupRemote = true
+
+[rebase]
+  updateRefs = true
+  autosquash = true
+
+[log]
+  date = relative
+
+[merge]
+  conflictStyle = zdiff3
+
+[diff]
+  colorMoved = default
+  submodule = log
+  tool = hunk
+
+[color]
+  ui = auto
+  interactive = auto
+
+[alias]
+  a = !git add -A && git status
+  ac = !git add -A && git commit
+  acm = !git add -A && git commit -m
+  au = !git add -u && git status
+  br = branch
+  c = commit
+  ca = commit --amend
+  co = checkout
+  cob = checkout -b
+  df = diff
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
+  lp = log -p
+  pushf = push --force-with-lease
+  st = status
+
+[core]
+  excludesfile = ~/.gitignore
+  pager = hunk pager
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
+
+[init]
+  defaultBranch = main
+
+[gpg]
+  format = ssh
+
+[include]
+  path = ~/.config/git/work.gitconfig
+
+[difftool "hunk"]
+  cmd = hunk difftool \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+
+[difftool]
+  prompt = false
