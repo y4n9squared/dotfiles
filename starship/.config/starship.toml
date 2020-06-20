@@ -1,0 +1,31 @@
+format = """
+$kubernetes\
+$python\
+$custom\
+$cmd_duration\
+$line_break\
+$character"""
+
+[kubernetes]
+format = '[$symbol $context( \($namespace\))]($style) '
+disabled = false
+style = "yellow"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+format = "[$symbol$virtualenv]($style) "
+style = "white"
+
+[custom.rpk]
+command = "rpk profile current"
+symbol = "🦊 "
+when = true
+style = "red"
