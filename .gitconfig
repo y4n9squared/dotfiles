@@ -1,0 +1,58 @@
+[user]
+	name = Yang Yang
+	email = y4n9squared@gmail.com
+
+[fetch]
+  prune = true
+
+[push]
+  default = current
+  recurseSubmodules = on-demand
+
+[status]
+  submoduleSummary = true
+
+[log]
+  date = relative
+
+[diff]
+  tool = vimdiff
+  submodule = log
+
+[color]
+  ui = auto
+  interactive = auto
+
+[alias]
+  a = !git add . && git status
+  aa = !git add . && git add -u . && git status
+  ac = !git add . && git commit
+  acm = !git add . && git commit -m
+  au = !git add -u . && git status
+  br = branch
+  c = commit
+  ca = commit --amend
+  co = checkout
+  cob = checkout -b
+  df = diff --color-words
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit
+  lp = log -p
+  pushf = push --force-with-lease
+  st = status
+
+[core]
+	excludesfile = ~/.gitignore
+  editor = vim
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+
+[protocol]
+  version = 2
