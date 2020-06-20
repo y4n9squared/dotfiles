@@ -1,0 +1,29 @@
+format = """
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$python\
+$cmd_duration\
+$line_break\
+$kubernetes\
+$character"""
+
+[kubernetes]
+symbol = "󱃾"
+format = '[$symbol $context( \($namespace\))]($style) '
+style = "blue"
+disabled = false
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+symbol = " "

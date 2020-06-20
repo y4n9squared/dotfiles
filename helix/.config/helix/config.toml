@@ -1,0 +1,41 @@
+theme = "catppuccin_mocha"
+
+[editor]
+true-color = true
+line-number = "relative"
+auto-pairs = false
+
+[editor.file-picker]
+hidden = false
+
+[editor.soft-wrap]
+enable = true
+
+[keys.normal]
+# Quick iteration on config changes
+C-r = ":config-reload"
+
+# Quick navigation
+C-h = "jump_view_left"
+C-l = "jump_view_right"
+
+# Vim muscle memory
+"{" = ["goto_prev_paragraph", "collapse_selection"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+G = "goto_file_end"
+
+[keys.normal."space"]
+# Overwrite space-F binding from CWD to buffer directory as the former is not that useful
+F = "file_picker_in_current_buffer_directory"
+
+[keys.select]
+# Vim muscle memory
+"{" = ["extend_to_line_bounds", "goto_prev_paragraph"]
+"}" = ["extend_to_line_bounds", "goto_next_paragraph"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+G = "goto_file_end"
+u = ["switch_to_lowercase", "collapse_selection", "normal_mode"]
+U = ["switch_to_uppercase", "collapse_selection", "normal_mode"]

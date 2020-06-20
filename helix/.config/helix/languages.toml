@@ -1,0 +1,36 @@
+[[language]]
+name = "python"
+language-servers = ["pyright", "ruff"]
+formatter = { command = "ruff", args = ["format", "-"] }
+file-types = ["py", "pyx"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[[language]]
+name = "protobuf"
+scope = "source.proto"
+file-types = ["proto"]
+language-servers = ["bufls"]
+grammar = "proto"
+
+[language-server.bufls]
+command = "buf"
+args = ["beta", "lsp"]
+
+[[language]]
+name = "markdown"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
+
+[[language]]
+name = "dockerfile"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "dockerfile"] }
+
+[[language]]
+name = "toml"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "toml"] }
+
+[[language]]
+name = "json"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "json"] }
