@@ -1,6 +1,6 @@
 [user]
-	name = Yang Yang
-	email = y4n9squared@gmail.com
+  name = Yang Yang
+  email = y4n9squared@gmail.com
 
 [fetch]
   prune = true
@@ -41,7 +41,7 @@
   st = status
 
 [core]
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
   editor = vim
 
 [rerere]
@@ -49,10 +49,10 @@
   autoupdate = true
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 
 [protocol]
   version = 2
