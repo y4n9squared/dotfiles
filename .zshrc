@@ -1,6 +1,9 @@
 export CLICOLOR=1  # Enable terminal colors
 
-HISTFILE=~/.cache/zsh/.zhistory   # Save history 
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export LIBGL_ALWAYS_INDIRECT=0
+
+HISTFILE=~/.cache/zsh/.zhistory   # Save history
 HISTSIZE=2000
 SAVEHIST=1000                   # Save the 1000 most recent commands
 
@@ -45,32 +48,11 @@ alias l='ls -CF'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias nbstrip="jq --indent 1 \
-    '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
-    | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
-    | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
-    | .cells[].metadata = {} \
-    '"
-
-alias dotconfig='git --git-dir=${HOME}/dotfiles/ --work-tree=$HOME'
-
-# If we detect 'hub' on our PATH, alias 'git' to it.
-HUB=$(command -v hub)
-if [[ ! -z $HUB ]]; then
-  eval "$(hub alias -s)"
-fi
-
-fpath+=("${ZDOTDIR}/pure")
+fpath+=($HOME/.zsh/pure)
 
 # Enable pure prompt
 autoload -U promptinit; promptinit
 prompt pure
 
-fpath+=("${ZDOTDIR}/completions")
-
 # Enable zsh completions
-autoload -Uz compinit && compinit -d ~/.cache/zsh/.zcompdump
-
-mkdir -p ~/.cache/zsh
-_Z_DATA=~/.cache/zsh/.z
-source "${ZDOTDIR}/z.sh"
+# autoload -Uz compinit && compinit -d ~/.cache/zsh/.zcompdump
