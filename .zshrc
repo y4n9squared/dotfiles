@@ -1,3 +1,5 @@
+export EDITOR="vim"
+
 export CLICOLOR=1  # Enable terminal colors
 
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
