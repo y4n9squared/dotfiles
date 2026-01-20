@@ -2,11 +2,11 @@ export EDITOR="hx"
 export CLICOLOR=1  # Enable terminal colors
 
 HISTFILE=~/.cache/zsh/.zhistory   # Save history
-HISTSIZE=2000
-SAVEHIST=1000                   # Save the 1000 most recent commands
+HISTSIZE=10000
+SAVEHIST=10000                   # Save the 10000 most recent commands
 
 # Do not save these common commands into our history
-HISTORY_IGNORE='([bf]g|cd|l[alsh]|less|vim|vim *|vi|vi *|exit|clear|z|tmux)'
+HISTORY_IGNORE='([bf]g|cd|cd *|l[alsht]|l[alsht] *|less|hx|hx *|vim|vim *|vi|vi *|nvim|nvim *|exit|clear|z|tmux)'
 
 # History Options
 #
@@ -19,23 +19,13 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt INC_APPEND_HISTORY_TIME
 
 set bell-style none  # diable beep
 
 unsetopt nomatch  # make globbing work by default
 
-# some more ls aliases
-alias ll='ls -alhF'
-alias la='ls -A'
-alias l='ls -CF'
-alias ..='cd ..'
-alias ...='cd ../..'
-
 if (( $+commands[fzf] )); then
   # Set up fzf key bindings and fuzzy completion
-  export FZF_CTRL_R_OPTS="--reverse"
-
   export FZF_CTRL_T_OPTS="
     --walker-skip .git,__pycache__
     --preview 'cat -n {}'
@@ -86,10 +76,6 @@ if (( $+commands[fzf] )); then
   fi
 fi
 
-if (( $+commands[brew] )); then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-fi
-
 # Must be called after FPATH is fully built
 autoload -U +X compinit && compinit
 
@@ -104,7 +90,7 @@ fi
 
 if (( $+commands[eza] )); then
   alias ll='eza --icons -lab'
-  alias lt='eza --icons -lab -T'
+  alias lt='eza --icons -lab -T --git-ignore'
 fi
 
 if (( $+commands[btop] )); then
@@ -113,12 +99,70 @@ fi
 
 if (( $+commands[kubectl] )); then
   source <(kubectl completion zsh)
+  alias k='kubectl'
 fi
 
 if (( $+commands[rpk] )); then
   source <(rpk generate shell-completion zsh)
 fi
 
-source ~/.config/op/plugins.sh
+if (( $+commands[cloc] )); then
+  alias cloc='cloc --quiet --hide-rate --by-file'
+fi
 
-. "$HOME/.local/bin/env"
+alias tf='terraform'
+
+update_ssh_agent() {
+    local var
+    var=$(tmux show-environment |grep '^SSH_AUTH_SOCK=')
+    if [ "$?" -eq 0 ]; then
+        eval "$var"
+    fi
+}
+
+if [[ -n "$TMUX" ]]; then
+    add-zsh-hook precmd update_ssh_agent
+fi
+
+. "$HOME/.atuin/bin/env"
+
+atuin-setup() {
+  if ! which atuin &> /dev/null; then return 1; fi
+  bindkey '^E' _atuin_search_widget
+
+  export ATUIN_NOBIND="true"
+  eval "$(atuin init "zsh")"
+
+  fzf-atuin-history-widget() {
+    local selected num
+    setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2>/dev/null
+
+    # local atuin_opts="--cmd-only --limit ${ATUIN_LIMIT:-5000}"
+    local atuin_opts="--cmd-only"
+    local fzf_opts=(
+      -p 
+      -w75%
+      -h80%
+      --tac
+      "-n2..,.."
+      --tiebreak=index
+      "--query=${LBUFFER}"
+      "+m"
+      "--bind=ctrl-d:reload(atuin search $atuin_opts -c $PWD),ctrl-r:reload(atuin search $atuin_opts)"
+    )
+
+    selected=$(eval "atuin search ${atuin_opts}" | fzf-tmux "${fzf_opts[@]}")
+    local ret=$?
+    if [ -n "$selected" ]; then
+      # the += lets it insert at current pos instead of replacing
+      LBUFFER+="${selected}"
+    fi
+    zle reset-prompt
+    return $ret
+  }
+
+  zle -N fzf-atuin-history-widget
+  bindkey '^R' fzf-atuin-history-widget
+}
+
+atuin-setup

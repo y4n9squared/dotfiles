@@ -7,5 +7,3 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
    fi
    eval `cat .ssh/ssh-agent`
 fi
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
