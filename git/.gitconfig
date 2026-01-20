@@ -35,8 +35,8 @@
   acm = !git add . && git commit -m
   au = !git add -u . && git status
   br = branch
-  c = commit
-  ca = commit --amend
+  c = commit -S
+  ca = commit --amend -S
   co = checkout
   cob = checkout -b
   df = diff
