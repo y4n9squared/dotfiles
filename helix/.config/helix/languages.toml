@@ -34,3 +34,7 @@ formatter = { command = "dprint", args = ["fmt", "--stdin", "toml"] }
 [[language]]
 name = "json"
 formatter = { command = "dprint", args = ["fmt", "--stdin", "json"] }
+
+[[language]]
+name = "yaml"
+formatter = { command = "dprint", args = ["fmt", "--stdin", "yaml"] }
