@@ -102,17 +102,14 @@ fi
 
 if (( $+commands[kubectl] )); then
   source <(kubectl completion zsh)
-  alias k='kubectl'
 fi
 
 if (( $+commands[rpk] )); then
   source <(rpk generate shell-completion zsh)
 fi
 
-if (( $+commands[cloc] )); then
-  alias cloc='cloc --quiet --hide-rate --by-file'
-fi
-
+alias cloc='cloc --quiet --hide-rate --by-file'
+alias k='kubectl'
 alias tf='terraform'
 
 update_ssh_agent() {
