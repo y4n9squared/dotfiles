@@ -24,6 +24,9 @@ set bell-style none  # diable beep
 
 unsetopt nomatch  # make globbing work by default
 
+# Make Ctrl-U work like bash
+bindkey \^U backward-kill-line
+
 if (( $+commands[fzf] )); then
   # Set up fzf key bindings and fuzzy completion
   export FZF_CTRL_T_OPTS="
