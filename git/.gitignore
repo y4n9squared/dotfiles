@@ -96,3 +96,5 @@ docs/_build/
 .dotfiles
 .vscode/
 .scratch
+
+.claude/
